@@ -43,13 +43,7 @@ exports.register = async (req, res) => {
     await newUser.save();
     // console.log(newUser);
 
-    const neo4jCreateNodeUser = await createUser(newUser);
-    // createNode("User", {
-    //   id: newUser._id.toString(),
-    //   email: newUser.email,
-    //   avatar: newUser.avatar,
-    //   username: newUser.username,
-    // });
+    //const neo4jCreateNodeUser = await createUser(newUser);
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);

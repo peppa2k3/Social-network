@@ -30,10 +30,10 @@ export default function GlobalContext({ children }) {
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
   // Theme settings
   const [primaryColor, setPrimaryColor] = useState(
-    sessionStorage.getItem("primaryColor") || "#2f3f"
+    sessionStorage.getItem("primaryColor") || "rgba(44, 245, 22, 1)"
   );
   const [secondaryColor, setSecondaryColor] = useState(
-    sessionStorage.getItem("secondaryColor") || "#FFB347"
+    sessionStorage.getItem("secondaryColor") || "#201f1fff"
   );
   const [darkMode, setDarkMode] = useState(
     sessionStorage.getItem("darkMode") === "true"
