@@ -36,31 +36,10 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 // Kết nối tới MongoDB
-console.log("MONGO_URI env:", process.env.MONGO_URI);
-// mongoose.connect("mongodb://root:root@mongo:27017/?authSource=admin", {
-//   dbName: "viesocial",
-// });
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     dbName: "viesocial",
-//   })
-//   .then(() => console.log("✅ Connected to MongoDB x"))
-//   .catch((err) => console.error("❌ MongoDB connection error:", err));
-async function ConnectDB() {
-  try {
-    await mongoose
-      .connect(process.env.MONGO_URI)
-      .then(() => console.log("Connected to MongoDB"))
-      .catch((error) => console.error("MongoDB connection error:", error));
-  } catch (err) {
-    console.log("error:", err);
-  }
-}
-ConnectDB();
-// mongoose
-//   .connect(process.env.MONGO_URI)
-//   .then(() => console.log("Connected to MongoDB"))
-//   .catch((error) => console.error("MongoDB connection error:", error));
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("MongoDB connection error:", error));
 
 const io = new Server(server, {
   cors: {
@@ -74,6 +53,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json()); // Xử lý dữ liệu JSON từ raw
 app.use(express.urlencoded({ extended: true })); // Xử lý dữ liệu từ form-data
+console.log("MONGO_URI:", process.env.MONGO_URI);
 
 // Routes cơ bản
 app.get("/", (req, res) => {

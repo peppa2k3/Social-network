@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  neo4j:
+    image: neo4j:5.18
+    container_name: neo4j
+    restart: always
+    ports:
+      - "7474:7474" # Browser
+      - "7687:7687" # Bolt
+    environment:
+      NEO4J_AUTH: neo4j/password123
+    volumes:
+      - neo4j_data:/data
+
+volumes:
+  neo4j_data:

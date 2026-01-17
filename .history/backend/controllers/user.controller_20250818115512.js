@@ -44,6 +44,12 @@ exports.register = async (req, res) => {
     // console.log(newUser);
 
     const neo4jCreateNodeUser = await createUser(newUser);
+    // createNode("User", {
+    //   id: newUser._id.toString(),
+    //   email: newUser.email,
+    //   avatar: newUser.avatar,
+    //   username: newUser.username,
+    // });
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
@@ -70,7 +76,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, email: user.email }, // Payload
       process.env.JWT_SECRET, // Mã bí mật (cần khai báo trong biến môi trường)
-      { expiresIn: "4h" }, // Thời gian hết hạn token
+      { expiresIn: "4h" } // Thời gian hết hạn token
     );
 
     res.json({ token, userId: user._id });

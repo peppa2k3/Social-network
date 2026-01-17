@@ -49,6 +49,7 @@ exports.createPost = async (req, res) => {
       video,
       visibility: visibility || "public", // Mặc định là công khai nếu không có giá trị
     });
+    //ko luu vao neo4j
     await createPost(newPost);
     // Lưu bài viết vào cơ sở dữ liệu
     await newPost.save();

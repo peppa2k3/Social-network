@@ -1,0 +1,28 @@
+version: "2.39.4"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    container_name: backend-social
+    restart: always
+    enviroment:
+      - PORT = 3000
+  frontend:
+    build: ./client
+    cotainer_name: frontend-social
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+  database:
+    container_name: mongodb_social
+    image: mongobd:lastest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    volumes:
+      mongodb_data:

@@ -49,11 +49,10 @@ exports.sendFriendRequest = async (req, res) => {
       requester: requesterId,
       recipient: recipientId,
     });
-    console.log("Kiểm tra nếu đã có yêu cầu kết bạn ok");
+
     if (existingRequest) {
       return res.status(400).json({ message: "Friend request already sent" });
     }
-    console.log(requesterId, recipientId);
     await sendFriendRequest(requesterId, recipientId); // Gọi hàm gửi yêu cầu kết bạn trong Neo4j
     console.log("tạo lời kết bạn neo4j ok");
     // Tạo yêu cầu kết bạn
@@ -146,20 +145,20 @@ exports.acceptFriendRequest = async (req, res) => {
     const friendship = await Friendship.findOneAndUpdate(
       { requester: requesterId, recipient: recipientId, status: "pending" },
       { status: "accepted" },
-      { new: true },
+      { new: true }
     );
 
     if (!friendship) {
       return res.status(404).json({ message: "Friend request not found" });
     }
 
-    const neo4jCreateFriendRef = await createRelationship(
-      "User",
-      requesterId,
-      "User",
-      recipientId,
-      "FRIENDS_WITH",
-    );
+    // const neo4jCreateFriendRef = await createRelationship(
+    //   "User",
+    //   requesterId,
+    //   "User",
+    //   recipientId,
+    //   "FRIENDS_WITH"
+    // );
 
     // 👇 Tạo notification thông báo cho người gửi
     const notification = new Notification({
@@ -244,12 +243,12 @@ exports.getFriendsList = async (req, res) => {
     const friendIds = friendships.map((friendship) =>
       friendship.requester.toString() === userId.toString()
         ? friendship.recipient
-        : friendship.requester,
+        : friendship.requester
     );
 
     // Truy vấn để lấy thông tin chi tiết của bạn bè
     const friends = await User.find({ _id: { $in: friendIds } }).select(
-      "username email name avatar",
+      "username email name avatar"
     );
 
     res.status(200).json(friends);

@@ -3,11 +3,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 //key
 const NEO4J_URI =
-  "neo4j+s://cbda0561.databases.neo4j.io" || process.env.NEO4J_URI;
-const NEO4J_USER = "neo4j" || process.env.NEO4J_USER;
+  process.env.NEO4J_URI || "neo4j+s://cbda0561.databases.neo4j.io";
+
+const NEO4J_USER = process.env.NEO4J_USER ;
+
 const NEO4J_PASSWORD =
-  "Fi5DRyCzD0-iutQsD4PJf8xX7SUOT8cFe5uf_xXcuH4" || process.env.NEO4J_PASSWORD;
+  process.env.NEO4J_PASSWORD ;
+
 // Singleton pattern cho driver
+
 let driver;
 
 function getDriver() {
