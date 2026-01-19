@@ -36,7 +36,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 // Kết nối tới MongoDB
-console.log("MONGO_URI env:", process.env.MONGO_URI);
+console.log("MONGO_URI env :", process.env.MONGO_URI);
 // mongoose.connect("mongodb://root:root@mongo:27017/?authSource=admin", {
 //   dbName: "viesocial",
 // });
@@ -49,7 +49,10 @@ console.log("MONGO_URI env:", process.env.MONGO_URI);
 async function ConnectDB() {
   try {
     await mongoose
-      .connect(process.env.MONGO_URI)
+      .connect(
+        process.env.MONGO_URI ||
+          "mongodb://admin1:pass1@mongo:27017/social?authSource=admin",
+      )
       .then(() => console.log("Connected to MongoDB"))
       .catch((error) => console.error("MongoDB connection error:", error));
   } catch (err) {
