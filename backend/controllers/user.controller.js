@@ -69,7 +69,7 @@ exports.login = async (req, res) => {
     // Tạo JWT
     const token = jwt.sign(
       { id: user._id, email: user.email }, // Payload
-      process.env.JWT_SECRET, // Mã bí mật (cần khai báo trong biến môi trường)
+      process.env.JWT_SECRET || "social_secret_2026", // Mã bí mật (cần khai báo trong biến môi trường)
       { expiresIn: "4h" }, // Thời gian hết hạn token
     );
 

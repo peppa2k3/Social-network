@@ -18,7 +18,7 @@ const authenticateToken = (req, res, next) => {
   // Xử lý token - lấy token từ header
   jwt.verify(
     tokenWithoutBearer,
-    process.env.JWT_SECRET,
+    process.env.JWT_SECRET || "social_secret_2026",
     async (err, decoded) => {
       if (err) {
         return res
@@ -30,7 +30,7 @@ const authenticateToken = (req, res, next) => {
       req.userId = decoded.id; // Lưu userId từ decoded token vào req
 
       next(); // Chuyển tiếp đến route handler
-    }
+    },
   );
 };
 
