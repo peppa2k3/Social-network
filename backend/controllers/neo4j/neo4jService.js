@@ -2,19 +2,20 @@ const neo4j = require("neo4j-driver");
 const dotenv = require("dotenv");
 dotenv.config();
 //key
-const NEO4J_URI =
-  process.env.NEO4J_URI || "neo4j+s://cbda0561.databases.neo4j.io";
+const NEO4J_URI = process.env.NEO4J_URI || "bolt://neo4j:7687";
 
-const NEO4J_USER = process.env.NEO4J_USER ;
+const NEO4J_USER = process.env.NEO4J_USER || "neo4j";
 
-const NEO4J_PASSWORD =
-  process.env.NEO4J_PASSWORD ;
+const NEO4J_PASSWORD = process.env.NEO4J_PASSWORD || "password123";
 
 // Singleton pattern cho driver
 
 let driver;
 
 function getDriver() {
+  console.log(NEO4J_URI);
+  console.log(NEO4J_USER);
+  console.log(NEO4J_PASSWORD);
   if (!driver) {
     driver = neo4j.driver(
       NEO4J_URI,
@@ -24,7 +25,7 @@ function getDriver() {
         maxConnectionPoolSize: 50,
         connectionAcquisitionTimeout: 2 * 60 * 1000, // 2 minutes
         disableLosslessIntegers: true,
-      }
+      },
     );
   }
   return driver;
