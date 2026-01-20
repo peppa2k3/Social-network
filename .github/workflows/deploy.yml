@@ -24,7 +24,7 @@ jobs:
 
       - name: Build & Push Frontend
         run: |
-          docker build -t peppa2k3/socialfe:1.0 ./frontend
+          docker build -t peppa2k3/socialfe:1.0 ./client
           docker push peppa2k3/socialfe:1.0
 
       - name: Deploy to VPS
